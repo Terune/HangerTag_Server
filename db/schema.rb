@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518082541) do
+ActiveRecord::Schema.define(version: 20150518084627) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -45,6 +45,75 @@ ActiveRecord::Schema.define(version: 20150518082541) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "nickname"
+    t.string   "email"
+    t.integer  "level"
+    t.date     "birthday"
+    t.integer  "point"
+    t.string   "gender"
+    t.string   "name"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.string   "type"
+    t.string   "size"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "sale_items", force: :cascade do |t|
+    t.integer  "sale_id"
+    t.integer  "quantity"
+    t.integer  "price"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sale_items", ["sale_id"], name: "index_sale_items_on_sale_id"
+
+  create_table "sales", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.integer  "quantity"
+    t.datetime "time"
+    t.integer  "price"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sales", ["shop_id"], name: "index_sales_on_shop_id"
+  add_index "sales", ["user_id"], name: "index_sales_on_user_id"
+
+  create_table "shops", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "shop_id"
+    t.integer  "quantity"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stocks", ["product_id"], name: "index_stocks_on_product_id"
+  add_index "stocks", ["shop_id"], name: "index_stocks_on_shop_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

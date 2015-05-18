@@ -61,4 +61,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :admin
+  
+  resources :shops
+  resources :products
+  resources :sales
+  resources :customers
+  resources :sale_items
+  resources :stocks
 end
