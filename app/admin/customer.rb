@@ -1,5 +1,6 @@
 ActiveAdmin.register Customer do
 
+permit_params :nickname, :email, :level, :birthday, :point, :gender, :name, :phone
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

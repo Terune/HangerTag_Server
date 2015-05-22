@@ -50,50 +50,50 @@ ActiveRecord::Schema.define(version: 20150518084627) do
     t.string   "user_id"
     t.string   "nickname"
     t.string   "email"
-    t.integer  "level"
+    t.integer  "level",      default: 0
     t.date     "birthday"
-    t.integer  "point"
+    t.integer  "point",      default: 0
     t.string   "gender"
     t.string   "name"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.integer  "price"
+    t.integer  "price",       default: 0
     t.string   "type"
     t.string   "size"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "sale_items", force: :cascade do |t|
     t.integer  "sale_id"
-    t.integer  "quantity"
-    t.integer  "price"
+    t.integer  "quantity",   default: 0
+    t.integer  "price",      default: 0
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "sale_items", ["sale_id"], name: "index_sale_items_on_sale_id"
 
   create_table "sales", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "customer_id"
     t.integer  "shop_id"
     t.integer  "quantity"
     t.datetime "time"
-    t.integer  "price"
+    t.integer  "price",       default: 0
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
+  add_index "sales", ["customer_id"], name: "index_sales_on_customer_id"
   add_index "sales", ["shop_id"], name: "index_sales_on_shop_id"
-  add_index "sales", ["user_id"], name: "index_sales_on_user_id"
 
   create_table "shops", force: :cascade do |t|
     t.string   "name"
@@ -106,10 +106,10 @@ ActiveRecord::Schema.define(version: 20150518084627) do
   create_table "stocks", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "shop_id"
-    t.integer  "quantity"
+    t.integer  "quantity",   default: 0
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "stocks", ["product_id"], name: "index_stocks_on_product_id"

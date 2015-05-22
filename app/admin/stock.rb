@@ -12,7 +12,7 @@ ActiveAdmin.register Stock do
 #   permitted << :other if resource.something?
 #   permitted
 # end
-permit_params :quantity
+permit_params :quantity, :name, :shop, :product
 
     index do
         selectable_column
