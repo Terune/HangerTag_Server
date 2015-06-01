@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :admin
-  
+  resources :customer_comments  
   resources :shops
   resources :products
   resources :sales
