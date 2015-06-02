@@ -25,5 +25,7 @@ module HangerTagServer
     config.web_console.whitelisted_ips = '163.239.200.133' 
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use ActionDispatch::Flash
+    # de-activate tolken auth
+    config.action_controller.allow_forgery_protection = false
   end
 end
