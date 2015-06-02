@@ -13,6 +13,4 @@ permit_params :nickname, :email, :level, :birthday, :point, :gender, :name, :pho
 #   permitted << :other if resource.something?
 #   permitted
 # end
-
-
 end
