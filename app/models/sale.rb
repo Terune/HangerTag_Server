@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Sale < ActiveRecord::Base
   belongs_to :customer
   belongs_to :shop

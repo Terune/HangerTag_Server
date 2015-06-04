@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CustomerComment < ActiveRecord::Base
   belongs_to :customer
   belongs_to :product
