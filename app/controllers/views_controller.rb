@@ -1,5 +1,4 @@
 class ViewsController < ApplicationController
-    layout "report"
 
     def index
         @views = View.all
