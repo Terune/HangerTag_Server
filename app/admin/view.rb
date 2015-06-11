@@ -1,6 +1,6 @@
 ActiveAdmin.register View do
 
-permit_params :customer_id, :product_id, :shop_id, :point
+permit_params :Customer_id, :Product_id, :Shop_id, :Point
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

@@ -1,9 +1,16 @@
 class ViewsController < ApplicationController
+    layout "report"
+
     def index
         @views = View.all
     end
     def show
         @view = View.find(params[:id])
+        respond_to do |format|
+            format.html # show.html.erb
+            format.xml  { render :xml => @views }
+            format.json { render :json => @views }
+        end
     end
 
     def create
