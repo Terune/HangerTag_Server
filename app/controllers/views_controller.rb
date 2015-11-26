@@ -1,7 +1,7 @@
 class ViewsController < ApplicationController
 
     def index
-        @views = View.all
+        @views = View.all  
     end
     def show
         @view = View.find(params[:id])
@@ -65,6 +65,6 @@ class ViewsController < ApplicationController
 
 # Never trust parameters from the scary internet, only allow the white list through.
     def view_params
-    params.require(:view).permit(:Customer_id, :Product_id, :Shop_id, :P:oint)
+    params.require(:view).permit(:Customer_id, :Product_id, :Shop_id, :Point)
     end
 end

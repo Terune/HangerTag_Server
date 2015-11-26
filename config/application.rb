@@ -21,6 +21,8 @@ module HangerTagServer
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+
+    config.time_zone = 'Seoul'
     config.encoding = "utf-8"
     config.web_console.whitelisted_ips = '221.154.45.30' 
     config.web_console.whitelisted_ips = '163.239.200.133' 

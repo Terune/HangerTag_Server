@@ -69,4 +69,5 @@ Rails.application.routes.draw do
   resources :sale_items
   resources :stocks
   resources :views
+  resources :report
   end

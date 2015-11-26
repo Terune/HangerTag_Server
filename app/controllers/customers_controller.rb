@@ -3,6 +3,6 @@ class CustomersController < ApplicationController
         @customers = Customer.all
     end
     def show
-        @customer = Customer.find(params[:id])
+        @customer = Customer.where("Name LIKE '%#{params[:id]}%'")
     end
 end
