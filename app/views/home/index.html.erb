@@ -1,8 +1,10 @@
+
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <html>
 <head>
 </head>
 <body>
 <h1>Welcome to HangTag</h1>
+<%= line_chart View.group_by_hour(:created_at) %>
 </body>
-
 </html>

@@ -125,7 +125,7 @@
             <% end %>
             <% @products.each do |product| %>
             {
-                    "date": "<%=l product.try(:view).created_at.to_date%>",
+                    "date": <%=l product.try(:view).created_at.to_date%>,
                     "customer": "<%=view.try(:Customer).try(:name)%>",
                     "product": "<%=view.try(:Product).try(:name)%>",
                     "Shop":  "<%=view.try(:Shop).try(:name)%>",

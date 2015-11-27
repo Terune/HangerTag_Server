@@ -26,6 +26,7 @@ module HangerTagServer
     config.encoding = "utf-8"
     config.web_console.whitelisted_ips = '221.154.45.30' 
     config.web_console.whitelisted_ips = '163.239.200.133' 
+    config.web_console.whitelisted_ips = '143.248.55.170' 
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use ActionDispatch::Flash
     # de-activate tolken auth
