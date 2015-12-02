@@ -1,10 +1,23 @@
-
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= stylesheet_link_tag "home.scss" %>
+<%= javascript_include_tag "/highcharts.js", "chartkick" %>
 <html>
 <head>
 </head>
 <body>
 <h1>Welcome to HangTag</h1>
-<%= line_chart View.group_by_hour(:created_at) %>
+<%=  line_chart View.where("created_at >= :start_date AND created_at <= :end_date",
+          {start_date: 1.month.ago, end_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
+<%=  View.where("created_at >= :start_date AND created_at <= :end_date",
+          {start_date: 1.month.ago, end_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
+<%=  View.where("created_at >= :start_date AND created_at <= :end_date",
+          {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at).chart_json%>
+
+<%= line_chart @products.map{|product|
+        {name: product.name, data: product.views.where("created_at >= :start_date AND created_at <= :end_date",
+                            {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at)}
+} %>
+<%= line_chart @products.map{|product|
+        {name: product.name, data: product.views.group_by_week(:created_at)}
+} %>
 </body>
 </html>
