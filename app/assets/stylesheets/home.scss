@@ -2,6 +2,35 @@ body{
 background-image: image-url("back.jpg");
 }
 .highcharts-background{
-fill:rgba(255,255,255,0.7)
+fill:rgba(0,0,0,0);
+}
+#container{
+width:960px; margin:0 auto; padding:10px; 
+}
+#report_header{
+height:60px;
+padding-top: 30px;
+}
+#title{
+    font-size:40px;
+    font-weight:bold;
+color:rgba(255,255,255,0.9);
+}
+.report{
+color:white;
+      font-size:30px;
+background-color: rgba(0,0,0,0.8);
+padding: 10px;
+margin:10px;
+}
+.left{
+width:300px;
+float:left;
 }
 
+.right{
+float:right;
+}
+.down{
+clear:both;
+}

@@ -1,23 +1,60 @@
-<%= stylesheet_link_tag "home.scss" %>
-<%= javascript_include_tag "/highcharts.js", "chartkick" %>
+<%= javascript_include_tag "dark-unica.js", "chartkick" %>
 <html>
 <head>
 </head>
 <body>
-<h1>Welcome to HangTag</h1>
-<%=  line_chart View.where("created_at >= :start_date AND created_at <= :end_date",
+<div id="container">
+<div id="report_header">
+<span id="title">HangTag Report</span>
+</div>
+<div id="content">
+<div id="daily" class="report">
+<%=image_tag("daily.png")%>
+</br>Customers
+<div class="left">
+<%= pie_chart @customers.map{|customer|
+        [customer.name,customer.views.where("created_at >= :start_date",
+                            {start_date: 1.day.ago}).group_by_minute(:created_at).count]
+} ,library = {'width': 300}%>
+</div>
+<div class="right">
+<%= line_chart @customers.map{|customer|
+        {name: customer.name, data: customer.views.where("created_at >= :start_date",
+                            {start_date: 1.day.ago}).group_by_minute(:created_at)}
+} %>
+</div>
+<div class="down">
+Customer View
+<%=  line_chart View.where("created_at >= :start_date",
+          {start_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
+Product View
+<%= line_chart @products.map{|product|
+        {name: product.name, data: product.views.where("created_at >= :start_date",
+                            {start_date: 1.day.ago}).group_by_minute(:created_at)}
+} %>
+</div>
+</div>
+<div id="weekly" class="report">
+<%=image_tag("weekly.png")%>
+</br>
+<%=area_chart  View.where("created_at >= :start_date AND created_at <= :end_date",
           {start_date: 1.month.ago, end_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
-<%=  View.where("created_at >= :start_date AND created_at <= :end_date",
-          {start_date: 1.month.ago, end_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
-<%=  View.where("created_at >= :start_date AND created_at <= :end_date",
-          {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at).chart_json%>
+<%= pie_chart  View.where("created_at >= :start_date AND created_at <= :end_date",
+          {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at)%>
 
 <%= line_chart @products.map{|product|
         {name: product.name, data: product.views.where("created_at >= :start_date AND created_at <= :end_date",
                             {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at)}
 } %>
+</div>
+<div id="monthly" class="report">
+<%=image_tag("monthly.png")%>
+</br>
 <%= line_chart @products.map{|product|
         {name: product.name, data: product.views.group_by_week(:created_at)}
 } %>
+</div>
+</div>
+</div>
 </body>
 </html>
