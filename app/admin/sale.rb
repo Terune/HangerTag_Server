@@ -1,6 +1,6 @@
 ActiveAdmin.register Sale do
 
-permit_params :customer, :shop, :quantity, :time, :price, :status
+permit_params :Customer_id, :Shop_id, :quantity, :time, :price, :status
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

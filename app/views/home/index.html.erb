@@ -10,7 +10,7 @@
 <div id="content">
 <div id="daily" class="report">
 <%=image_tag("daily.png")%>
-</br>Customers
+</br>Visited Customers
 <div class="left">
 <%= pie_chart @customers.map{|customer|
         [customer.name,customer.views.where("created_at >= :start_date",
@@ -24,10 +24,10 @@
 } %>
 </div>
 <div class="down">
-Customer View
-<%=  line_chart View.where("created_at >= :start_date",
+Customer Visit time
+<%= area_chart View.where("created_at >= :start_date",
           {start_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
-Product View
+Favorite Product
 <%= line_chart @products.map{|product|
         {name: product.name, data: product.views.where("created_at >= :start_date",
                             {start_date: 1.day.ago}).group_by_minute(:created_at)}
@@ -36,23 +36,55 @@ Product View
 </div>
 <div id="weekly" class="report">
 <%=image_tag("weekly.png")%>
-</br>
-<%=area_chart  View.where("created_at >= :start_date AND created_at <= :end_date",
-          {start_date: 1.month.ago, end_date: 1.day.ago}).group(:product_id).group_by_minute(:created_at)%>
-<%= pie_chart  View.where("created_at >= :start_date AND created_at <= :end_date",
-          {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at)%>
-
-<%= line_chart @products.map{|product|
-        {name: product.name, data: product.views.where("created_at >= :start_date AND created_at <= :end_date",
-                            {start_date: 1.month.ago, end_date: 1.day.ago}).group_by_minute(:created_at)}
+</br>Visited Customers
+<div class="left">
+<%= pie_chart @customers.map{|customer|
+        [customer.name,customer.views.where("created_at >= :start_date",
+                            {start_date: 1.week.ago}).group_by_day(:created_at).count]
+} ,library = {'width': 300}%>
+</div>
+<div class="right">
+<%= line_chart @customers.map{|customer|
+        {name: customer.name, data: customer.views.where("created_at >= :start_date",
+                            {start_date: 1.week.ago}).group_by_day(:created_at)}
 } %>
+</div>
+<div class="down">
+Customer Visit time
+<%= area_chart View.where("created_at >= :start_date",
+          {start_date: 1.week.ago}).group(:product_id).group_by_day(:created_at)%>
+Favorite Product
+<%= line_chart @products.map{|product|
+        {name: product.name, data: product.views.where("created_at >= :start_date",
+                            {start_date: 1.week.ago}).group_by_day(:created_at)}
+} %>
+</div>
 </div>
 <div id="monthly" class="report">
 <%=image_tag("monthly.png")%>
-</br>
-<%= line_chart @products.map{|product|
-        {name: product.name, data: product.views.group_by_week(:created_at)}
+</br>Visited Customers
+<div class="left">
+<%= pie_chart @customers.map{|customer|
+        [customer.name,customer.views.where("created_at >= :start_date",
+                            {start_date: 1.month.ago}).group_by_week(:created_at).count]
+} ,library = {'width': 300}%>
+</div>
+<div class="right">
+<%= line_chart @customers.map{|customer|
+        {name: customer.name, data: customer.views.where("created_at >= :start_date",
+                            {start_date: 1.month.ago}).group_by_week(:created_at)}
 } %>
+</div>
+<div class="down">
+Customer Visit week
+<%= area_chart View.where("created_at >= :start_date",
+          {start_date: 1.week.ago}).group(:product_id).group_by_week(:created_at)%>
+Favorite Product
+<%= line_chart @products.map{|product|
+        {name: product.name, data: product.views.where("created_at >= :start_date",
+                            {start_date: 1.month.ago}).group_by_week(:created_at)}
+} %>
+</div>
 </div>
 </div>
 </div>
